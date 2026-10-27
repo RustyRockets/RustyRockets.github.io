@@ -1,0 +1,222 @@
+---
+// The whole site is this one page. All text comes from src/data/profile.ts;
+// this file only arranges it: hero, about, selected work, path, outside work,
+// contact. Styles below are scoped to this page; colors come from Base.astro.
+import Base from '../layouts/Base.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import { profile, path, projects, skills, interests } from '../data/profile';
+---
+
+<Base
+  title={`${profile.name} · ${profile.role}`}
+  description={`${profile.role} in ${profile.location}. ${profile.tagline}`}
+>
+  <header class="nav wrap">
+    <a class="mark" href="#top">RC</a>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#path">Path</a>
+      <a href="#life">Life</a>
+      <a href="#contact">Contact</a>
+      <ThemeToggle />
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">{profile.role} · {profile.location}</p>
+          <h1>{profile.name}</h1>
+          <p class="tagline">{profile.tagline}</p>
+          <div class="cta">
+            <a class="btn" href={profile.linkedin} rel="noopener">Connect on LinkedIn</a>
+            <a class="btn ghost" href={profile.github} rel="noopener">GitHub</a>
+          </div>
+        </div>
+        <img class="headshot" src="/headshot.jpg" alt={`Portrait of ${profile.name}`} width="640" height="640" />
+      </div>
+    </section>
+
+    <section class="about wrap narrow">
+      {profile.intro.map((p) => <p>{p}</p>)}
+    </section>
+
+    <section id="work" class="wrap">
+      <h2>Selected work</h2>
+      <p class="lede">The kinds of problems I like, and how I approach them.</p>
+      <div class="cards">
+        {
+          projects.map((p) => (
+            <article class="card">
+              <p class="label">{p.label}</p>
+              <h3>{p.title}</h3>
+              <p class="problem">{p.problem}</p>
+              <p>{p.approach}</p>
+              <p class="outcome">{p.outcome}</p>
+              {p.link && <a class="card-link" href={p.link.href} rel="noopener">{p.link.text} →</a>}
+              <ul class="tags">
+                {p.tools.map((t) => <li>{t}</li>)}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="path" class="wrap">
+      <h2>The path so far</h2>
+      <p class="lede">
+        Retail, then banking, now search. The full résumé lives on <a href={profile.linkedin} rel="noopener">LinkedIn</a>.
+      </p>
+      <ol class="path">
+        {
+          path.map((p) => (
+            <li>
+              <p class="years">{p.years}</p>
+              <h3>{p.place}</h3>
+              <p class="role">{p.role}</p>
+              <p>{p.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="toolkit">
+        <h3>Tools I reach for</h3>
+        <ul class="tags">
+          {skills.map((s) => <li>{s}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section id="life" class="wrap">
+      <h2>Outside work</h2>
+      <p class="lede">What fills the rest of the week.</p>
+      <div class="interests">
+        {
+          interests.map((i) => (
+            <div class="interest">
+              <h3>{i.title}</h3>
+              <p>{i.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="contact" class="wrap">
+      <div class="contact">
+        <h2>Let's talk</h2>
+        <p>Open to conversations about analytics, experimentation and data science roles, or just a good data problem.</p>
+        <div class="cta">
+          <a class="btn" href={profile.linkedin} rel="noopener">Message me on LinkedIn</a>
+          <a class="btn ghost" href={profile.github} rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p>
+      © {new Date().getFullYear()} {profile.name} · Last updated {
+        new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+      }
+    </p>
+  </footer>
+</Base>
+
+<style>
+  /* Layout: centered content column with a 16px phone gutter. */
+  .wrap { max-width: 1040px; margin-left: auto; margin-right: auto; padding: 0 16px; }
+  .narrow { max-width: 720px; }
+  @media (min-width: 720px) { .wrap { padding: 0 32px; } }
+
+  section { margin-top: 5.5rem; }
+  section > h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); margin-bottom: 0.5rem; }
+  .lede, .muted { color: var(--muted); }
+
+  /* Top navigation. Tighter spacing on small phones so all links fit. */
+  .nav { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-top: 1.5rem; padding-bottom: 1.5rem; }
+  .nav nav { display: flex; gap: 1.25rem; align-items: center; }
+  @media (max-width: 479px) {
+    .nav nav { gap: 0.8rem; }
+    .nav nav a { font-size: 0.85rem; }
+  }
+  .nav a { color: var(--ink); text-decoration: none; font-size: 0.95rem; }
+  .nav nav a:hover { color: var(--accent); }
+  .mark { font-family: var(--serif); font-weight: 600; font-size: 1.2rem; }
+
+  /* Hero: name and tagline, headshot to the right on desktop, above on phones. */
+  .hero { margin-top: 3.5rem; }
+  .hero-grid { display: grid; gap: 2rem; align-items: center; }
+  .headshot {
+    order: -1; width: 128px; height: 128px; border-radius: 50%; object-fit: cover;
+    border: 4px solid var(--surface); box-shadow: 0 0 0 1px var(--line);
+  }
+  @media (min-width: 820px) {
+    .hero-grid { grid-template-columns: 1fr auto; gap: 3rem; }
+    .headshot { order: 0; width: 260px; height: 260px; }
+  }
+  .eyebrow { color: var(--accent); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .hero h1 { font-size: clamp(2.4rem, 7vw, 4.6rem); letter-spacing: -0.01em; }
+  .tagline { font-size: clamp(1.15rem, 2.2vw, 1.4rem); color: var(--muted); max-width: 34ch; margin-top: 1rem; }
+
+  .about { margin-top: 4rem; font-size: 1.125rem; }
+
+  /* Buttons. */
+  .cta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
+  .btn {
+    display: inline-block; padding: 0.7rem 1.2rem; border-radius: 999px;
+    background: var(--accent); color: var(--bg); text-decoration: none; font-weight: 500;
+    overflow-wrap: anywhere;
+  }
+  .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .btn:hover { filter: brightness(1.08); }
+
+  /* Selected work: 1, 2 or 3 columns by width (6 cards fill 2 or 3 columns evenly). */
+  .cards { display: grid; gap: 1rem; margin-top: 2rem; }
+  @media (min-width: 720px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1000px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+  .card { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 1.5rem; }
+  .card .label { color: var(--accent); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .card h3 { font-size: 1.3rem; margin-bottom: 0.75rem; }
+  .card .problem { color: var(--muted); font-style: italic; }
+  .card .outcome { font-weight: 500; border-top: 1px solid var(--line); padding-top: 0.75rem; }
+  .card-link { font-weight: 500; margin-bottom: 1rem; }
+  .card .tags { margin-top: auto; }
+
+  /* Pill-shaped tags for tools and skills. */
+  .tags { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tags li { background: var(--accent-soft); color: var(--ink); font-size: 0.8rem; padding: 0.2rem 0.65rem; border-radius: 999px; }
+
+  /* The path: vertical rail with a dot per stop; the current role's dot is filled. */
+  .path { list-style: none; padding: 0; margin: 2.5rem 0 0; max-width: 760px; position: relative; }
+  .path::before { content: ''; position: absolute; left: 5px; top: 0.6rem; bottom: 0.6rem; width: 2px; background: var(--line); }
+  .path > li { position: relative; padding: 0 0 2.25rem 2.25rem; }
+  .path > li::before {
+    content: ''; position: absolute; left: 0; top: 0.35rem; width: 12px; height: 12px;
+    border-radius: 50%; background: var(--bg); border: 2px solid var(--accent);
+  }
+  .path > li:first-child::before { background: var(--accent); }
+  .path .years { color: var(--accent); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.3rem; }
+  .path h3 { font-size: 1.3rem; }
+  .path .role { color: var(--muted); font-size: 0.95rem; margin: 0.15rem 0 0.5rem; }
+  .path > li > p:last-child { margin: 0; max-width: 60ch; }
+
+  .toolkit { margin-top: 1.5rem; }
+  .toolkit h3 { font-family: var(--sans); font-size: 0.95rem; font-weight: 600; margin-bottom: 0.75rem; }
+
+  /* Outside work. */
+  .interests { display: grid; gap: 1.75rem 2.5rem; margin-top: 2rem; }
+  @media (min-width: 720px) { .interests { grid-template-columns: repeat(3, 1fr); } }
+  .interest { border-left: 3px solid var(--accent); padding-left: 1rem; }
+  .interest h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+  .interest p { color: var(--muted); margin: 0; }
+
+  /* Contact card and footer. */
+  .contact { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 2rem 1.25rem; }
+  @media (min-width: 720px) { .contact { padding: 3rem; } }
+  .contact > p { max-width: 50ch; color: var(--muted); }
+
+  footer { margin-top: 4rem; padding-bottom: 2rem; color: var(--muted); font-size: 0.9rem; }
+</style>

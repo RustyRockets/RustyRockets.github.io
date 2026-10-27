@@ -1,0 +1,83 @@
+---
+// Page shell shared by every page: <head> metadata, fonts, the theme
+// bootstrap script, and the global design tokens (colors, fonts).
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+
+// Absolute URL for link previews (LinkedIn, Slack, iMessage need a full URL).
+const previewImage = new URL('/headshot.jpg', Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={previewImage} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script is:inline>
+      // Light by default; apply a saved choice before paint to avoid a flash.
+      try {
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.dataset.theme = 'dark';
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  /* Design tokens. Light theme is the default; the dark theme overrides the
+     same variables when <html data-theme="dark"> is set by the toggle. */
+  :root {
+    --bg: #f7f4ee;
+    --surface: #fffdf9;
+    --ink: #1c1d1f;
+    --muted: #5d6066;
+    --line: #e2ddd3;
+    --accent: #1f6f66;
+    --accent-soft: #dcebe7;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', system-ui, -apple-system, sans-serif;
+    color-scheme: light;
+  }
+  :root[data-theme='dark'] {
+    --bg: #141517;
+    --surface: #1c1e21;
+    --ink: #ecebe7;
+    --muted: #a2a5ab;
+    --line: #2e3135;
+    --accent: #6cc3b6;
+    --accent-soft: #1d3632;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 1.0625rem/1.65 var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.15; margin: 0; }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:hover { text-decoration-thickness: 2px; }
+  p { margin: 0 0 1rem; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+</style>
