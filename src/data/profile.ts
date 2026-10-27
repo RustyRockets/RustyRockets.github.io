@@ -1,54 +1,23 @@
-// Single source for site content. Rules: see CLAUDE.md — no employer/client
-// dollar figures, customer counts or program names; Home Depot = methods only.
+// Single source for site content. The page is told as a story: a thesis in the
+// hero, four chapters in chronological order (each with the projects from that
+// era), an "off the clock" interlude, and an epilogue about what's next.
+//
+// Content rules: no employer/client dollar figures, customer counts or program
+// names. Home Depot = methods only; past roles may use general percentages.
 
 export const profile = {
-  name: 'Ranganathan Chandrashekhar',
+  firstName: 'Ranganathan',
+  nickname: 'Rusty',
+  lastName: 'Chandrashekhar',
+  name: 'Ranganathan “Rusty” Chandrashekhar',
   role: 'Data Scientist',
   location: 'Atlanta, GA',
   linkedin: 'https://www.linkedin.com/in/ranganathan-chandrashekhar',
   github: 'https://github.com/RustyRockets',
-  tagline:
-    'I turn messy behavioral, text and transaction data into decisions people can act on.',
-  intro: [
-    'Most of my work sits where a business question meets messy data: why products come back, whether a program actually worked, which credit strategy balances growth against risk, and how people find things in search.',
-    'Away from data: guitar, history, and strategy games.',
-  ],
+  // The through-line of the whole page.
+  thesis: "I'm curious about how things really work: in data, in history, and in a long game of grand strategy.",
+  thesisFollowUp: 'For most of the last decade, that curiosity has also been my job.',
 };
-
-// Narrative career path, newest first. One or two sentences each — the
-// achievements live on the project cards, not here.
-export const path = [
-  {
-    years: '2026 – now',
-    place: 'The Home Depot',
-    role: 'Data Scientist',
-    text: 'Working on how customers find products through search and browse. Much of it is experimentation and causal analysis, plus making sure the numbers underneath can be trusted.',
-  },
-  {
-    years: '2025 – 2026',
-    place: 'Tiger Analytics',
-    role: 'Sr. Analytics Consultant',
-    text: 'A switch to banking: credit risk strategy for a lending client, where every decision trades growth against losses and an explainable model beats a clever one.',
-  },
-  {
-    years: '2023 – 2024',
-    place: 'University of Cincinnati',
-    role: 'M.S. Business Analytics',
-    text: 'Back to school full-time for machine learning, optimization, simulation and forecasting.',
-  },
-  {
-    years: '2017 – 2023',
-    place: 'Merkle',
-    role: 'Co-op to Lead Analyst',
-    text: 'Started as a co-op while finishing my engineering degree and stayed six years, through five roles. Retail and e-commerce analytics end to end: returns, reviews, supply chain, forecasting and a lot of reporting.',
-  },
-  {
-    years: '2018',
-    place: 'Kumaraguru College of Technology',
-    role: 'B.E. Computer Science',
-    text: 'Where it started.',
-  },
-];
 
 export type Project = {
   title: string;
@@ -60,59 +29,137 @@ export type Project = {
   link?: { href: string; text: string };
 };
 
-// Method-focused case studies. Written as problem types, not client engagements.
-export const projects: Project[] = [
+export type Chapter = {
+  id: string;
+  years: string;
+  place: string;
+  role: string;
+  title: string;
+  story: string[];
+  projects: Project[];
+};
+
+export const chapters: Chapter[] = [
   {
-    title: 'What changed in search?',
-    label: 'Causal inference · Home Depot',
-    problem:
-      'A metric drops right after a release, but several things shipped at once. Which one did it, and how do you catch the next one sooner?',
-    approach:
-      'Difference-in-differences to isolate the cause, then an independent release-testing framework that checks ranking models around each launch.',
-    outcome: 'Pinned the drop on a specific change; the framework later caught a ranking regression in production.',
-    tools: ['Difference-in-differences', 'BigQuery', 'Python'],
+    id: 'merkle',
+    years: '2017 – 2023',
+    place: 'Merkle',
+    role: 'Co-op to Lead Analyst',
+    title: 'Learning how things really work',
+    story: [
+      'I studied computer science, but it was a co-op at Merkle in 2017 that made data click for me: analysis was the fastest way to find out what was actually going on in a business.',
+      'I stayed six years, through five roles from co-op to lead analyst, working on retail and e-commerce. Why do products come back? What are customers really saying? Did that program actually change anything? Two of those questions shaped how I work.',
+    ],
+    projects: [
+      {
+        title: 'Making customer text measurable',
+        label: 'NLP',
+        problem:
+          'Reviews, return reasons and call logs held the "why" behind product problems, but nobody could read them at scale.',
+        approach:
+          'Topic modeling and n-grams to group complaints into themes, sentiment scoring to track them, and reporting that routed each theme to the team that could fix it.',
+        outcome: 'Linked to a 15% rise in positive reviews.',
+        tools: ['Python', 'Topic modeling', 'Sentiment analysis'],
+      },
+      {
+        title: 'Did the program actually work?',
+        label: 'Experimentation',
+        problem:
+          'Quality programs were rolling out to products, but nobody could tell whether they reduced returns or just coincided with seasonality.',
+        approach:
+          'SKU-level A/B test design, plus an R Shiny app so category managers could check program impact themselves.',
+        outcome: 'Program coverage grew 27% in the first quarter.',
+        tools: ['R', 'R Shiny', 'A/B testing'],
+      },
+    ],
   },
   {
-    title: 'Trust the numbers first',
-    label: 'Data quality · Home Depot',
-    problem:
-      'Dashboards everyone relies on can drift quietly when tracking or pipelines break upstream.',
-    approach:
-      'A full audit reconciling each reported figure against source data, tracing every gap back to the tracking or pipeline step behind it.',
-    outcome: 'Every figure validated, and several upstream breaks found that were silently undercounting activity.',
-    tools: ['BigQuery', 'SQL', 'Data validation'],
+    id: 'masters',
+    years: '2023 – 2024',
+    place: 'University of Cincinnati',
+    role: 'M.S. Business Analytics',
+    title: 'Stepping back to go deeper',
+    story: [
+      'After six years of answering questions with the tools I had, I wanted better ones. I went back to school full-time for an M.S. in Business Analytics: machine learning, optimization, simulation and forecasting.',
+    ],
+    projects: [],
   },
   {
-    title: 'Did the program actually work?',
-    label: 'Experimentation · Merkle',
-    problem:
-      'Quality programs were rolling out to products, but nobody could tell whether they reduced returns or just coincided with seasonality.',
-    approach:
-      'SKU-level A/B test design, plus an R Shiny app so category managers could check program impact themselves.',
-    outcome: 'Program coverage grew 27% in the first quarter.',
-    tools: ['R', 'R Shiny', 'A/B testing'],
+    id: 'tiger',
+    years: '2025 – 2026',
+    place: 'Tiger Analytics',
+    role: 'Sr. Analytics Consultant',
+    title: 'A different kind of risk',
+    story: [
+      'Next came a deliberate change of scenery: credit risk strategy for a lending client, a field where being wrong shows up as losses.',
+      'It taught me that a model people can explain and trust often beats a cleverer one.',
+    ],
+    projects: [
+      {
+        title: 'Simpler, explainable credit strategy',
+        label: 'Risk strategy',
+        problem:
+          'A custom scoring model was hard to explain and maintain for credit line decisions.',
+        approach:
+          'Replaced it with a transparent score-and-utilization grid, sized the volume-versus-loss trade-offs, and automated the monitoring pipeline behind it.',
+        outcome: '80% less manual pipeline work; dashboards about 40% faster.',
+        tools: ['SQL', 'Python', 'Airflow'],
+      },
+    ],
   },
   {
-    title: 'Making customer text measurable',
-    label: 'NLP · Merkle',
-    problem:
-      'Reviews, return reasons and call logs held the "why" behind product problems, but nobody could read them at scale.',
-    approach:
-      'Topic modeling and n-grams to group complaints into themes, sentiment scoring to track them, and reporting that routed each theme to the team that could fix it.',
-    outcome: 'Linked to a 15% rise in positive reviews.',
-    tools: ['Python', 'Topic modeling', 'Sentiment analysis'],
+    id: 'homedepot',
+    years: '2026 – now',
+    place: 'The Home Depot',
+    role: 'Data Scientist',
+    title: 'How people find things',
+    story: [
+      'Today I work on search and browse at The Home Depot. Search is a system with many moving parts (queries, filters, rankings and the people using them), and when a number moves, the first job is figuring out what really moved it.',
+    ],
+    projects: [
+      {
+        title: 'What changed in search?',
+        label: 'Causal inference',
+        problem:
+          'A metric drops right after a release, but several things shipped at once. Which one did it, and how do you catch the next one sooner?',
+        approach:
+          'Difference-in-differences to isolate the cause, then an independent release-testing framework that checks ranking models around each launch.',
+        outcome: 'Pinned the drop on a specific change; the framework later caught a ranking regression in production.',
+        tools: ['Difference-in-differences', 'BigQuery', 'Python'],
+      },
+      {
+        title: 'Trust the numbers first',
+        label: 'Data quality',
+        problem:
+          'Dashboards everyone relies on can drift quietly when tracking or pipelines break upstream.',
+        approach:
+          'A full audit reconciling each reported figure against source data, tracing every gap back to the tracking or pipeline step behind it.',
+        outcome: 'Every figure validated, and several upstream breaks found that were silently undercounting activity.',
+        tools: ['BigQuery', 'SQL', 'Data validation'],
+      },
+    ],
   },
-  {
-    title: 'Simpler, explainable credit strategy',
-    label: 'Risk strategy · Tiger Analytics',
-    problem:
-      'A custom scoring model was hard to explain and maintain for credit line decisions.',
-    approach:
-      'Replaced it with a transparent score-and-utilization grid, sized the volume-versus-loss trade-offs, and automated the monitoring pipeline behind it.',
-    outcome: '80% less manual pipeline work; dashboards about 40% faster.',
-    tools: ['SQL', 'Python', 'Airflow'],
-  },
-  {
+];
+
+// Interlude: the same curiosity outside work.
+export const interlude = {
+  title: 'Off the clock',
+  intro: 'Same curiosity, different settings.',
+  interests: [
+    {
+      title: 'Guitar, metal & rock',
+      text: 'I play guitar and listen to a lot of metal and rock.',
+    },
+    {
+      title: 'History & strategy games',
+      text: 'Mostly the history of how things actually worked: trade, logistics and institutions. Grand strategy and RPGs scratch the same itch.',
+    },
+    {
+      title: 'Reading',
+      text: 'A lot of it is statistics. Causal inference, experimentation and machine learning are favorites.',
+    },
+  ],
+  project: {
     title: 'Can a betting system beat the house?',
     label: 'Side project',
     problem:
@@ -122,22 +169,19 @@ export const projects: Project[] = [
     outcome: 'Across 10,000 simulated players, 98% were ahead at some point, yet even quitting on doubling their money, only 35% would have made it.',
     tools: ['R', 'tidyverse', 'Simulation'],
     link: { href: 'https://github.com/RustyRockets/martingale-simulator', text: 'Code and results on GitHub' },
-  },
-];
+  } satisfies Project,
+};
 
-export const skills = ['Python', 'SQL', 'R', 'BigQuery', 'Snowflake', 'Airflow', 'Tableau', 'Power BI', 'A/B testing', 'Causal inference', 'Forecasting', 'Machine learning', 'NLP'];
-
-export const interests = [
-  {
-    title: 'Guitar, metal & rock',
-    text: 'I play guitar and listen to a lot of metal and rock.',
-  },
-  {
-    title: 'History & strategy games',
-    text: 'Especially the kind of history about how things actually worked: trade, logistics and institutions. Grand strategy and RPGs scratch the same itch.',
-  },
-  {
-    title: 'Reading',
-    text: 'Plenty of it is statistics: causal inference, experimentation and machine learning are favorites.',
-  },
-];
+// Epilogue: where the story goes next.
+export const epilogue = {
+  title: "What's next",
+  intro: 'The questions I want to spend the next few years on:',
+  directions: [
+    { title: 'Causal inference at scale', text: 'Finding out what really caused a change when a clean A/B test is not an option.' },
+    { title: 'Search and ranking', text: 'How people find things, and how to measure whether results are actually getting better.' },
+    { title: 'ML in production', text: 'Moving from analysis to models that ship, and keeping them honest once they do.' },
+    { title: 'Product data science', text: 'Working alongside product teams so the data shapes what gets built, not just what gets reported.' },
+  ],
+  closing: "If you're working on any of these, I'd like to hear about it.",
+  toolkit: ['Python', 'SQL', 'R', 'BigQuery', 'Snowflake', 'Airflow', 'Tableau', 'Power BI'],
+};
