@@ -163,12 +163,12 @@ export const interlude = {
     title: 'Can a betting system beat the house?',
     label: 'Side project',
     problem:
-      'The Martingale promises steady wins: double your bet after every loss and the first win recovers everything. What really happens to the bankroll?',
+      'The Martingale promises steady wins: double your bet after every loss and the first win recovers everything. Can any betting system beat roulette?',
     approach:
-      'A simulator in R for classic and reverse Martingale with configurable win probability, stop-loss and profit targets, playing each run out until the target or ruin.',
-    outcome: 'Across 10,000 simulated players, 98% were ahead at some point, yet even quitting on doubling their money, only 35% would have made it.',
-    tools: ['R', 'tidyverse', 'Simulation'],
-    link: { href: 'https://github.com/RustyRockets/martingale-simulator', text: 'Code and results on GitHub' },
+      'Six strategies analysed two independent ways in R, by Monte Carlo simulation and by solving each game exactly as a Markov chain, tested against each other and published results. Includes an interactive explorer that runs in the browser.',
+    outcome: 'On an American wheel, every system loses the same 5.26% of what it bets. Trying to double $400, one bold bet succeeds 47% of the time; the Martingale manages 35%.',
+    tools: ['R', 'Simulation', 'Markov chains', 'Quarto', 'Shiny'],
+    link: { href: 'https://rustyrockets.github.io/martingale-simulator/', text: 'Read the analysis' },
   } satisfies Project,
 };
 
