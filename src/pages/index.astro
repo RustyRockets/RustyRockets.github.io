@@ -206,7 +206,9 @@ import { profile, chapters, interlude, epilogue } from '../data/profile';
   /* Interlude. */
   .interests { display: grid; gap: 1.75rem 2.5rem; margin-top: 2rem; }
   @media (min-width: 720px) { .interests { grid-template-columns: repeat(3, 1fr); } }
-  .interest { border-left: 3px solid var(--accent); padding-left: 1rem; }
+  /* A short accent bar above each title (not a full-height side border, which
+     would stretch to the tallest column and look uneven next to short text). */
+  .interest::before { content: ''; display: block; width: 32px; height: 3px; border-radius: 2px; background: var(--accent); margin-bottom: 0.9rem; }
   .interest h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
   .interest p { color: var(--muted); margin: 0; }
   .side-project { max-width: 560px; margin-top: 2.5rem; }
