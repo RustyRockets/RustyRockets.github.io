@@ -37,7 +37,7 @@ import { profile, chapters, interlude, epilogue } from '../data/profile';
           <p class="thesis-follow">{profile.thesisFollowUp}</p>
           <div class="cta">
             <a class="btn" href="#story">Read the story ↓</a>
-            <a class="btn ghost" href={profile.linkedin} rel="noopener">LinkedIn</a>
+            <a class="btn ghost" href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>
         </div>
         <img class="headshot" src="/headshot.jpg" alt={`Portrait of ${profile.name}`} width="640" height="640" />
@@ -105,8 +105,8 @@ import { profile, chapters, interlude, epilogue } from '../data/profile';
         </div>
         <p class="closing">{epilogue.closing}</p>
         <div class="cta">
-          <a class="btn" href={profile.linkedin} rel="noopener">Message me on LinkedIn</a>
-          <a class="btn ghost" href={profile.github} rel="noopener">GitHub</a>
+          <a class="btn" href={profile.linkedin} target="_blank" rel="noopener noreferrer">Message me on LinkedIn</a>
+          <a class="btn ghost" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
         <div class="toolkit">
           <p>Everyday toolkit</p>

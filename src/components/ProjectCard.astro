@@ -15,7 +15,7 @@ const { project: p } = Astro.props;
   <p class="problem">{p.problem}</p>
   <p>{p.approach}</p>
   <p class="outcome">{p.outcome}</p>
-  {p.link && <a class="card-link" href={p.link.href} rel="noopener">{p.link.text} →</a>}
+  {p.link && <a class="card-link" href={p.link.href} target="_blank" rel="noopener noreferrer">{p.link.text} →</a>}
   <ul class="tags">
     {p.tools.map((t) => <li>{t}</li>)}
   </ul>
