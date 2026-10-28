@@ -141,22 +141,23 @@ export const chapters: Chapter[] = [
   },
 ];
 
-// Interlude: the same curiosity outside work.
+// Interlude: life outside work, in plain first person.
+// Interest text may contain <em> for titles (rendered as HTML).
 export const interlude = {
   title: 'Off the clock',
-  intro: 'Same curiosity, different settings.',
+  intro: 'A few things I do for fun.',
   interests: [
     {
-      title: 'Guitar, metal & rock',
-      text: "Self-taught, mostly by learning the songs I love: Alice in Chains, Stone Temple Pilots, Metallica, Guns N' Roses. Working a song out until it finally sounds right is its own kind of problem-solving.",
+      title: 'Guitar',
+      text: "I taught myself guitar by learning songs from bands I love: Alice in Chains, Stone Temple Pilots, Metallica and Guns N' Roses.",
     },
     {
       title: 'History & strategy games',
-      text: 'Mostly the history of how things actually worked: trade, logistics and institutions. Grand strategy and RPGs scratch the same itch.',
+      text: "I'm especially into post-Napoleonic Europe, which might explain the hours I've put into <em>Victoria 3</em>. I also play a lot of <em>Europa Universalis IV</em>, <em>Crusader Kings</em> and <em>Hearts of Iron IV</em>, and on the RPG side, <em>Baldur's Gate 3</em> and <em>Divinity: Original Sin 2</em>.",
     },
     {
       title: 'Reading',
-      text: 'History, fantasy and sci-fi, and a fair amount of statistics. On the stats shelf, my favorites are Trustworthy Online Controlled Experiments, the go-to book on A/B testing, and The StatQuest Illustrated Guide to Machine Learning.',
+      text: 'Fantasy and sci-fi, plus the occasional stats book. Two favorites: <em>Trustworthy Online Controlled Experiments</em> and <em>The StatQuest Illustrated Guide to Machine Learning</em>.',
     },
   ],
   project: {

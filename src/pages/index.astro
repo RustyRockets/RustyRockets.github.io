@@ -78,7 +78,7 @@ import { profile, chapters, interlude, epilogue } from '../data/profile';
           interlude.interests.map((it) => (
             <div class="interest">
               <h3>{it.title}</h3>
-              <p>{it.text}</p>
+              <p set:html={it.text} />{/* our own text, allows <em> for titles */}
             </div>
           ))
         }
