@@ -148,7 +148,7 @@ export const interlude = {
   interests: [
     {
       title: 'Guitar, metal & rock',
-      text: 'I play guitar and listen to a lot of metal and rock.',
+      text: "Self-taught, mostly by learning the songs I love: Alice in Chains, Stone Temple Pilots, Metallica, Guns N' Roses. Working a song out until it finally sounds right is its own kind of problem-solving.",
     },
     {
       title: 'History & strategy games',
@@ -156,7 +156,7 @@ export const interlude = {
     },
     {
       title: 'Reading',
-      text: 'A lot of it is statistics. Causal inference, experimentation and machine learning are favorites.',
+      text: 'History, fantasy and sci-fi, and a fair amount of statistics. On the stats shelf, my favorites are Trustworthy Online Controlled Experiments, the go-to book on A/B testing, and The StatQuest Illustrated Guide to Machine Learning.',
     },
   ],
   project: {
