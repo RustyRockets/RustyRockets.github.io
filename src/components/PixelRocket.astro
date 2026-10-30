@@ -1,0 +1,76 @@
+---
+// Original pixel-art rocket used as the home link (a nod to the RustyRockets
+// handle). Drawn on a 13 × 18 grid below; each character is one pixel:
+//   B = body (page ink color)    R = porthole rim and F = fins (accent color)
+//   G = porthole glass (page background, so it reads as a window in both themes)
+//   O = flame (orange)           Y = flame core (yellow)      . = transparent
+// Colors come from theme variables, so the rocket adapts to light/dark mode.
+// Rendered at exactly 2 screen pixels per grid pixel to keep edges crisp.
+const grid = [
+  '......B......',
+  '.....BBB.....',
+  '....BBBBB....',
+  '....BBBBB....',
+  '...BBBBBBB...',
+  '...BBRRRBB...',
+  '...BBRGRBB...',
+  '...BBRRRBB...',
+  '...BBBBBBB...',
+  '...BBBBBBB...',
+  '..FBBBBBBBF..',
+  '.FFBBBBBBBFF.',
+  'FFFBBBBBBBFFF',
+  'FF.BBBBBBB.FF',
+  '....BBBBB....',
+  '.....OYO.....',
+  '.....OYO.....',
+  '......O......',
+];
+
+const fill: Record<string, string> = {
+  B: 'var(--ink)',
+  R: 'var(--accent)',
+  G: 'var(--bg)',
+  F: 'var(--accent)',
+  O: '#f08a3c',
+  Y: '#ffc94d',
+};
+
+// Flame pixels get their own class so they can flicker on hover.
+const pixels = grid.flatMap((row, y) =>
+  [...row].flatMap((c, x) => (c in fill ? [{ x, y, c }] : [])),
+);
+---
+
+<svg
+  class="rocket"
+  viewBox={`0 0 ${grid[0].length} ${grid.length}`}
+  width={grid[0].length * 2}
+  height={grid.length * 2}
+  shape-rendering="crispEdges"
+  aria-hidden="true"
+>
+  {
+    pixels.map((p) => (
+      <rect x={p.x} y={p.y} width="1" height="1" fill={fill[p.c]} class={'OY'.includes(p.c) ? 'flame' : undefined} />
+    ))
+  }
+</svg>
+
+<style>
+  .rocket { display: block; transition: transform 0.25s ease; }
+  .flame { transform-box: fill-box; }
+
+  /* Hover/focus on the home link: the rocket lifts off and the flame flickers. */
+  :global(a:hover) > .rocket,
+  :global(a:focus-visible) > .rocket { transform: translateY(-3px); }
+  :global(a:hover) > .rocket .flame { animation: flicker 0.18s steps(2) infinite alternate; }
+  @keyframes flicker { to { opacity: 0.45; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rocket { transition: none; }
+    :global(a:hover) > .rocket,
+    :global(a:focus-visible) > .rocket { transform: none; }
+    :global(a:hover) > .rocket .flame { animation: none; }
+  }
+</style>

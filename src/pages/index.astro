@@ -7,6 +7,7 @@
 import Base from '../layouts/Base.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import PixelRocket from '../components/PixelRocket.astro';
 import { profile, chapters, interlude, epilogue } from '../data/profile';
 ---
 
@@ -15,7 +16,7 @@ import { profile, chapters, interlude, epilogue } from '../data/profile';
   description={`${profile.role} in ${profile.location}. ${profile.thesis}`}
 >
   <header class="nav wrap">
-    <a class="mark" href="#top">RC</a>
+    <a class="mark" href="#top" aria-label="Back to top" title="Back to top"><PixelRocket /></a>
     <nav>
       <a href="#story">Story</a>
       <a href="#off-the-clock">Off the clock</a>
@@ -141,7 +142,7 @@ import { profile, chapters, interlude, epilogue } from '../data/profile';
   .nav nav { display: flex; gap: 1.25rem; align-items: center; }
   .nav a { color: var(--ink); text-decoration: none; font-size: 0.95rem; white-space: nowrap; }
   .nav nav a:hover { color: var(--accent); }
-  .mark { font-family: var(--serif); font-weight: 600; font-size: 1.2rem; }
+  .mark { display: block; padding: 2px; border-radius: 6px; }
   @media (max-width: 479px) {
     .nav nav { gap: 0.8rem; }
     .nav nav a { font-size: 0.85rem; }
