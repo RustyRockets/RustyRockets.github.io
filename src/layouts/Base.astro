@@ -35,6 +35,14 @@ const previewImage = new URL('/headshot.jpg', Astro.site);
         if (localStorage.getItem('theme') === 'dark') document.documentElement.dataset.theme = 'dark';
       } catch (e) {}
     </script>
+    {/* Visitor analytics (GoatCounter): cookie-free daily counts, countries and
+        referrers. Dashboard: https://rustyrockets.goatcounter.com.
+        The script never counts localhost, so local previews are not recorded. */}
+    <script
+      is:inline
+      data-goatcounter="https://rustyrockets.goatcounter.com/count"
+      async
+      src="https://gc.zgo.at/count.js"></script>
   </head>
   <body>
     <slot />
