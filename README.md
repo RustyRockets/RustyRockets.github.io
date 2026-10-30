@@ -21,7 +21,8 @@ npm run build   # production build in dist/
 | `src/data/profile.ts` | Site content |
 | `src/pages/index.astro` | Page layout and styles |
 | `src/layouts/Base.astro` | Document head and theme tokens |
-| `src/components/` | UI components |
+| `src/components/` | UI components, including the pixel-art rocket |
+| `scripts/make-icons.py` | Regenerates the favicons from the rocket's pixel grid |
 | `.github/workflows/deploy.yml` | Build and deploy on push to `main` |
 
 ## License
