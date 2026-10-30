@@ -16,7 +16,7 @@ export const profile = {
   github: 'https://github.com/RustyRockets',
   // The through-line of the whole page.
   thesis: "I'm curious about how things really work: in data, in history, and in a long game of grand strategy.",
-  thesisFollowUp: 'For most of the last decade, that curiosity has also been my job.',
+  thesisFollowUp: 'For most of the last decade, that curiosity has also been my job. These days that means search, experimentation and causal inference.',
 };
 
 export type Project = {
@@ -45,10 +45,10 @@ export const chapters: Chapter[] = [
     years: '2017 – 2023',
     place: 'Merkle',
     role: 'Co-op to Lead Analyst',
-    title: 'Learning how things really work',
+    title: 'Learning the trade',
     story: [
-      'I studied computer science, but it was a co-op at Merkle in 2017 that made data click for me: analysis was the fastest way to find out what was actually going on in a business.',
-      'I stayed six years, through five roles from co-op to lead analyst, working on retail and e-commerce. Why do products come back? What are customers really saying? Did that program actually change anything? Two of those questions shaped how I work.',
+      'I studied computer science, but it was a co-op at Merkle in 2017 that made data click for me: analysis was the fastest way to find out what was going on in a business.',
+      'I stayed six years, through five roles from co-op to lead analyst, working on retail and e-commerce. Why do products come back? What are customers saying? Did that program change anything? The two projects below came out of those questions.',
     ],
     projects: [
       {
@@ -57,7 +57,7 @@ export const chapters: Chapter[] = [
         problem:
           'Reviews, return reasons and call logs held the "why" behind product problems, but nobody could read them at scale.',
         approach:
-          'Topic modeling and n-grams to group complaints into themes, sentiment scoring to track them, and reporting that routed each theme to the team that could fix it.',
+          'Text mining (topic modeling and n-grams) to sort complaints into themes, sentiment scoring to track how customers felt about each, and reporting that sent each theme to the team that could fix it.',
         outcome: 'Linked to a 15% rise in positive reviews.',
         tools: ['Python', 'Topic modeling', 'Sentiment analysis'],
       },
@@ -114,7 +114,7 @@ export const chapters: Chapter[] = [
     role: 'Data Scientist',
     title: 'How people find things',
     story: [
-      'Today I work on search and browse at The Home Depot. Search is a system with many moving parts (queries, filters, rankings and the people using them), and when a number moves, the first job is figuring out what really moved it.',
+      'Today I work on search and browse at The Home Depot. Search is a system with many moving parts (queries, filters, rankings and the people using them), and when a number moves, the first job is figuring out what moved it.',
     ],
     projects: [
       {
@@ -123,7 +123,7 @@ export const chapters: Chapter[] = [
         problem:
           'A metric drops right after a release, but several things shipped at once. Which one did it, and how do you catch the next one sooner?',
         approach:
-          'Difference-in-differences to isolate the cause, then an independent release-testing framework that checks ranking models around each launch.',
+          'Difference-in-differences (comparing against parts of search the release didn\'t touch) to isolate the cause, then an independent release-testing framework that checks ranking models around each launch.',
         outcome: 'Pinned the drop on a specific change; the framework later caught a ranking regression in production.',
         tools: ['Difference-in-differences', 'BigQuery', 'Python'],
       },
@@ -166,7 +166,7 @@ export const interlude = {
     problem:
       'The Martingale promises steady wins: double your bet after every loss and the first win recovers everything. Can any betting system beat roulette?',
     approach:
-      'Six strategies analysed two independent ways in R, by Monte Carlo simulation and by solving each game exactly as a Markov chain, tested against each other and published results. Includes an interactive explorer that runs in the browser.',
+      'Six betting strategies, tested two ways in R: simulating 10,000 players per strategy, and calculating each one\'s exact odds. An interactive explorer lets you try them in your browser.',
     outcome: 'On an American wheel, every system loses the same 5.26% of what it bets. Trying to double $400, one bold bet succeeds 47% of the time; the Martingale manages 35%.',
     tools: ['R', 'Simulation', 'Markov chains', 'Quarto', 'Shiny'],
     link: { href: 'https://rustyrockets.github.io/martingale-simulator/', text: 'Read the analysis' },
@@ -178,8 +178,8 @@ export const epilogue = {
   title: "What's next",
   intro: 'The questions I want to spend the next few years on:',
   directions: [
-    { title: 'Causal inference at scale', text: 'Finding out what really caused a change when a clean A/B test is not an option.' },
-    { title: 'Search and ranking', text: 'How people find things, and how to measure whether results are actually getting better.' },
+    { title: 'Causal inference at scale', text: 'Finding out what caused a change when a clean A/B test is not an option.' },
+    { title: 'Search and ranking', text: 'How people find things, and how to measure whether results are getting better.' },
     { title: 'ML in production', text: 'Moving from analysis to models that ship, and keeping them honest once they do.' },
     { title: 'Product data science', text: 'Working alongside product teams so the data shapes what gets built, not just what gets reported.' },
   ],
